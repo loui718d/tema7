@@ -12,7 +12,6 @@
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
         max-width: 1000px;
-        text-align: center;
       }
 
       section article {
@@ -86,7 +85,18 @@
 
       const foot = document.querySelector("footer");
 
-      console.log(foot);
+      console.log(header);
+
+      header.innerHTML = "<h1>Søde dyr</h1>";
+
+      h2.textContent = "Se mange søde dyr herunder";
+
+      h31.textContent = "Dette er et dyr";
+      h32.textContent = "Dette er også et dyr";
+      p1.textContent =
+        "I denne tekst kan du læse om en masse søde dyr...Lorem ipsum dolor sit, amet consectetur adipisicing elit";
+      p2.textContent =
+        "Læs her endnu mere om en masse søde dyr...Lorem ipsum dolor sit, amet consectetur adipisicing elit";
     </script>
   </body>
 </html>
