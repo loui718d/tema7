@@ -69,6 +69,7 @@
     <hr />
 
     <script>
+      // tilføjer elementer
       const header = document.querySelector("header");
       const h2 = document.querySelector("main h2");
       const section = document.querySelector("main section");
@@ -87,6 +88,7 @@
 
       console.log(header);
 
+      //   ændrer tekst
       header.innerHTML = "<h1>Søde dyr</h1>";
 
       h2.textContent = "Se mange søde dyr herunder";
@@ -98,10 +100,31 @@
       p2.textContent =
         "Læs her endnu mere om en masse søde dyr...Lorem ipsum dolor sit, amet consectetur adipisicing elit";
 
+      // ændrer billeder
       img1.src = "billede1.jpg";
       img2.src = "billede2.jpg";
       img1.alt = "Nyt billede1";
       img2.alt = "Nyt billede2";
+
+      //   tilføjer element
+
+      let art3 = document.createElement("article");
+      section.appendChild(art3);
+
+      let img = document.createElement("img");
+      img.src = "https://placeimg.com/640/480/animals";
+
+      let h3 = document.createElement("h3");
+      let overskrift = document.createTextNode("Endnu et dyr");
+      h3.appendChild(overskrift);
+
+      let p = document.createElement("p");
+      let tekst = document.createTextNode("Se lige endnu et sødt dyr");
+      p.appendChild(tekst);
+
+      art3.appendChild(img);
+      art3.appendChild(h3);
+      art3.appendChild(p);
     </script>
   </body>
 </html>
