@@ -43,6 +43,13 @@
         font-size: 2rem;
         margin-top: 1rem;
       }
+      nav {
+        grid-column: 2/3;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 10px;
+        gap: 5px;
+      }
       h1 {
         color: rgb(228, 36, 36);
         font-size: 4rem;
@@ -83,7 +90,15 @@
       <div id="overskrift"><h1>BISTRO BABUSHKA</h1></div>
     </header>
     <main>
-      <h2>Menu</h2>
+      <nav>
+        <button data-kategori="alle">Alle</button>
+        <button data-kategori="drikkevarer">Drikkevarer</button>
+        <button data-kategori="sideorders">Sideorders</button>
+        <button data-kategori="forretter">Forretter</button>
+        <button data-kategori="hovedretter">Hovedretter</button>
+        <button data-kategori="desserter">Desserter</button>
+      </nav>
+      <h2>Alle</h2>
       <section></section>
 
       <template>
@@ -97,27 +112,44 @@
       </template>
     </main>
     <script>
+      const url = "https://babushka-dd8a.restdb.io/rest/menu";
+      let retter;
+      let filter = "alle";
+      const filterknapper = document.querySelectorAll("button");
+      const options = {
+        headers: {
+          "x-apikey": "600ec2fb1346a1524ff12de4",
+        },
+      };
       document.addEventListener("DOMContentLoaded", start);
 
       function start() {
-        const url = "https://babushka-dd8a.restdb.io/rest/menu";
-        const options = {
-          headers: {
-            "x-apikey": "600ec2fb1346a1524ff12de4",
-          },
-        };
+        filterknapper.forEach((knap) => {
+          knap.addEventListener("click", setFilter);
+        });
+        hentData();
+      }
 
-        async function hentData() {
-          const respons = await fetch(url, options);
-          const json = await respons.json();
-          vis(json);
-        }
+      function setFilter() {
+        filter = this.dataset.kategori;
+        document.querySelector("h2").textContent = this.textContent;
+        vis();
+      }
 
-        let main = document.querySelector("section");
-        let temp = document.querySelector("template");
+      async function hentData() {
+        const respons = await fetch(url, options);
+        retter = await respons.json();
+        vis();
+      }
 
-        function vis(json) {
-          json.forEach((ret) => {
+      let main = document.querySelector("section");
+      let temp = document.querySelector("template");
+
+      function vis() {
+        console.log(retter);
+        main.innerHTML = "";
+        retter.forEach((ret) => {
+          if (filter == ret.kategori || filter == "alle") {
             let klon = temp.cloneNode(true).content;
             klon.querySelector("img").src =
               "medium/" + ret.billednavn + "-md.jpg";
@@ -126,15 +158,14 @@
             klon.querySelector(
               ".beskrivelse"
             ).textContent = `${ret.kortbeskrivelse}`;
-            klon.querySelector(".pris").textContent = "Pris:" + ret.pris + ",-";
+            klon.querySelector(".pris").textContent =
+              "Pris: " + ret.pris + ",-";
 
             main.appendChild(klon);
-          });
-
-          console.log(json);
-        }
-        hentData();
+          }
+        });
       }
+      hentData();
     </script>
   </body>
 </html>
