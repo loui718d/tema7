@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bistro Babushka</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Text&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      main {
+        display: grid;
+        grid-template-columns: 1fr minmax(0, 1200px) 1fr;
+      }
+
+      section {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 10px;
+        grid-column: 2/3;
+      }
+
+      article:nth-child(2n + 0) {
+        background: orange;
+      }
+
+      article {
+        margin: 10px;
+      }
+      h2 {
+        grid-column: 2/3;
+        padding: 10px;
+        font-size: 2rem;
+        margin-top: 1rem;
+      }
+      h1 {
+        color: rgb(228, 36, 36);
+        font-size: 4rem;
+        margin-top: 6rem;
+      }
+
+      #overskrift {
+        place-content: left;
+      }
+
+      h3 {
+        margin: 0.5rem;
+      }
+
+      p {
+        margin: 0.5rem;
+      }
+
+      img {
+        max-width: 100%;
+      }
+
+      header {
+        grid-column: 2/3;
+        background-color: orange;
+        display: grid;
+        grid-template-columns: 0.5fr 2fr;
+      }
+
+      header img {
+        max-width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div><img src="star.svg.png" alt="" /></div>
+      <div id="overskrift"><h1>BISTRO BABUSHKA</h1></div>
+    </header>
+    <main>
+      <h2>Menu</h2>
+      <section></section>
+
+      <template>
+        <article>
+          <img src="" alt="" />
+          <h3 class="navn"></h3>
+
+          <p class="beskrivelse"></p>
+          <p class="pris"></p>
+        </article>
+      </template>
+    </main>
+    <script>
+      document.addEventListener("DOMContentLoaded", start);
+
+      function start() {
+        const url = "https://babushka-dd8a.restdb.io/rest/menu";
+        const options = {
+          headers: {
+            "x-apikey": "600ec2fb1346a1524ff12de4",
+          },
+        };
+
+        async function hentData() {
+          const respons = await fetch(url, options);
+          const json = await respons.json();
+          vis(json);
+        }
+
+        let main = document.querySelector("section");
+        let temp = document.querySelector("template");
+
+        function vis(json) {
+          json.forEach((ret) => {
+            let klon = temp.cloneNode(true).content;
+            klon.querySelector("img").src =
+              "medium/" + ret.billednavn + "-md.jpg";
+            klon.querySelector("h3").textContent = `${ret.navn} `;
+
+            klon.querySelector(
+              ".beskrivelse"
+            ).textContent = `${ret.kortbeskrivelse}`;
+            klon.querySelector(".pris").textContent = "Pris:" + ret.pris + ",-";
+
+            main.appendChild(klon);
+          });
+
+          console.log(json);
+        }
+        hentData();
+      }
+    </script>
+  </body>
+</html>
