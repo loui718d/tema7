@@ -5,12 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bistro Babushka</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Serif+Text&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="stylesheet" href="https://use.typekit.net/zup3vxg.css" />
 
     <style>
       * {
@@ -33,36 +28,49 @@
       article {
         margin: 10px;
       }
+
+      article:hover {
+        background-color: lightslategrey;
+      }
+
       h2 {
         grid-column: 2/3;
         padding: 10px;
         font-size: 2rem;
         margin-top: 1rem;
+        font-family: "le-monde-livre-classic-byol", serif;
+        font-weight: 700;
       }
       nav {
         grid-column: 2/3;
         display: flex;
         flex-wrap: wrap;
         padding: 10px;
-        gap: 5px;
-        justify-content: center;
+        gap: 15px;
+        /* justify-content: center; */
+        margin-top: 15px;
       }
       h1 {
         color: #bb1a1a;
-        font-size: 4rem;
+        font-size: 2rem;
         margin-top: 2.5rem;
+        font-family: "bodoni-urw", serif;
+        font-style: oblique;
       }
 
-      #overskrift {
+      /* #overskrift {
         place-content: left;
-      }
+      } */
 
       h3 {
         margin: 0.5rem;
+        font-family: "bely", serif;
+        font-weight: 700;
       }
 
       p {
         margin: 0.5rem;
+        font-family: "bely", serif;
       }
 
       img {
@@ -82,19 +90,44 @@
           margin: 20px;
           margin-left: 40px;
         }
+        h1 {
+          color: #bb1a1a;
+          font-size: 4rem;
+          margin-top: 2.5rem;
+          font-family: "bodoni-urw", serif;
+          font-style: oblique;
+        }
+      }
+
+      header {
+        grid-column: 2/3;
+        background-color: rgb(17, 17, 80);
+        display: grid;
+        grid-template-columns: 0.2fr 2fr;
+      }
+
+      header img {
+        max-width: 110px;
+        margin: 20px;
+        margin-left: 40px;
       }
 
       /* knapper */
       button {
-        background-color: rgb(12, 12, 56);
-        border-style: none;
+        background-color: transparent;
+        border-style: ridge;
         padding: 5px;
         text-transform: uppercase;
-        border-radius: 5px;
-        font-family: Arial, Helvetica, sans-serif;
-        font-weight: 800;
-        color: #bb1a1a;
-        /* border-color: rgb(228, 36, 36); */
+        /* border-radius: 5px; */
+        font-family: "le-monde-livre-classic-byol", serif;
+        font-weight: 700;
+        font-size: 0.9rem;
+        color: rgb(12, 12, 56);
+        border-color: rgb(12, 12, 56);
+      }
+
+      button:hover {
+        background-color: #bb1a1a;
       }
 
       /* pop-up style */
@@ -119,6 +152,7 @@
       #modal article img {
         object-fit: cover;
         width: 100%;
+        max-height: 80%;
       }
     </style>
   </head>
@@ -143,6 +177,7 @@
           <img src="" alt="" />
           <h3 class="navn"></h3>
           <p class="beskrivelse"></p>
+          <br />
         </article>
       </aside>
       <section></section>
